@@ -5,11 +5,11 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { useAuth } from "./context/AuthProvider";
 import { Toaster } from "react-hot-toast";
-
 import { Navigate, Route, Routes } from "react-router-dom";
+
 function App() {
-  const [authUser, setAuthUser] = useAuth();
-  console.log(authUser);
+  const [authUser] = useAuth();
+
   return (
     <>
       <Routes>
@@ -17,26 +17,27 @@ function App() {
           path="/"
           element={
             authUser ? (
-              // <div className="flex h-screen">
-              //   <Left />
-              //   <Right />
-              // </div>
-              <div className="drawer lg:drawer-open">
+              <div className="drawer lg:drawer-open h-screen">
+                {/* drawer toggle */}
                 <input
                   id="my-drawer-2"
                   type="checkbox"
                   className="drawer-toggle"
                 />
-                <div className="drawer-content flex flex-col items-center justify-center">
+
+                {/* Right side */}
+                <div className="drawer-content flex h-screen">
                   <Right />
                 </div>
-                <div className="drawer-side">
+
+                {/* Left side */}
+                <div className="drawer-side h-screen">
                   <label
                     htmlFor="my-drawer-2"
                     aria-label="close sidebar"
                     className="drawer-overlay"
                   ></label>
-                  <ul className="menu w-80 min-h-full bg-black text-base-content">
+                  <ul className="menu w-80 h-full bg-black text-base-content p-0">
                     <Left />
                   </ul>
                 </div>

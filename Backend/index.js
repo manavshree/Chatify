@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -28,6 +29,16 @@ try {
 //routes
 app.use("/api/user", userRoute);
 app.use("/api/message", messageRoute);
+
+// code for starting the server and connecting front end and backend
+if(process.env.NODE_ENV === "production"){
+    const dirPath = path.resolve();
+    app.use(express.static("Frontend/dist"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(dirPath, "./Frontend/dist", "index.html"));
+    });
+}
+
 
 server.listen(PORT, () => {
     console.log(`Server is Running on port ${PORT}`);
